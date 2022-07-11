@@ -36,6 +36,51 @@
                 <a class="nav-link" href="#">Asia</a>
             </li>
         </ul>
+
+        <!-- 레스토랑 등록 폼 -->
+        <div id="post-place">
+            <h3>레스토랑 등록</h3>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">종류</span>
+                <input type="text" class="form-control" aria-label="Sizing example input"
+                    aria-describedby="inputGroup-sizing-default">
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">대륙</label>
+                <select class="form-select" id="inputGroupSelect01">
+                    <option disabled selected>선택 안함</option>
+                    <option value="AS">아시아</option>
+                    <option value="EU">유럽</option>
+                    <option value="SA">남아메리카</option>
+                    <option value="NA">북아메리카</option>
+                    <option value="AF">아프리카</option>
+                </select>
+            </div>
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupSelect01">별점</label>
+                <select class="form-select" id="inputGroupSelect01">
+                  <option disabled selected >선택</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            <div class="input-group">
+                <span class="input-group-text">리뷰</span>
+                <textarea class="form-control" aria-label="With textarea"></textarea>
+              </div>
+            <div class="mb-3">
+                <label for="formFile" class="form-label">이미지 파일</label>
+                <input class="form-control" type="file" id="formFile">
+            </div>
+        </div>
     </div>
     <script src='main.js'></script>
 </body>
