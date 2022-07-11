@@ -14,7 +14,30 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Javascript -->
+    <script>
+        function post_place() {
 
+            let name = $("#name").val();
+            let type = $("#type").val();
+            let continent = $("#continent").val();
+            let star = $("#star").val();
+            let review = $("#review").val();
+            let img_url = $("#img-url").val();
+
+            // console.log(name, type, continent, star, review, img_url);
+
+            $.ajax({
+                type: 'POST',
+                url: '/post',
+                data: { name_give: name, type_give: type, continent_give: continent, star_give: star, review_give: review, img_url_give: img_url },
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload()
+                }
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -41,18 +64,18 @@
         <div id="post-place">
             <h3>레스토랑 등록</h3>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">이름</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text">이름</span>
+                <input id="name" type="text" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default">종류</span>
-                <input type="text" class="form-control" aria-label="Sizing example input"
+                <span class="input-group-text">종류</span>
+                <input id="type" type="text" class="form-control" aria-label="Sizing example input"
                     aria-describedby="inputGroup-sizing-default">
             </div>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupSelect01">대륙</label>
-                <select class="form-select" id="inputGroupSelect01">
+                <select class="form-select" id="continent">
                     <option disabled selected>선택 안함</option>
                     <option value="AS">아시아</option>
                     <option value="EU">유럽</option>
@@ -63,26 +86,26 @@
             </div>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="inputGroupSelect01">별점</label>
-                <select class="form-select" id="inputGroupSelect01">
-                  <option disabled selected >선택</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
+                <select class="form-select" id="star">
+                    <option disabled selected>선택</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
                 </select>
-              </div>
+            </div>
             <div class="input-group">
                 <span class="input-group-text">리뷰</span>
-                <textarea class="form-control" aria-label="With textarea"></textarea>
-              </div>
-            <div class="mb-3">
-                <label for="formFile" class="form-label">이미지 파일</label>
-                <input class="form-control" type="file" id="formFile">
+                <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
             </div>
+            <label for="basic-url" class="form-label">이미지 URL</label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="img-url" aria-describedby="basic-addon3">
+            </div>
+            <button onclick="post_place()" type="button" class="btn btn-warning post-btn">등록</button>
         </div>
     </div>
-    <script src='main.js'></script>
 </body>
 
 </html>
