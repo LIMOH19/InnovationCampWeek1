@@ -41,12 +41,12 @@ def post_place():
 
 
 # 주문 목록보기(Read) API
-# @app.route('/mars', methods=['GET'])
-# def view_orders():
+@app.route('/post', methods=['GET'])
+def view_places():
     
-#     orders = list(db.onlineshop.find({}, {'_id': False}))
+    places = list(db.restaurants.find({}, {'_id': False}))
 
-#     return jsonify({'orders': orders})
+    return jsonify({'places': places})
 
 
 if __name__ == '__main__':

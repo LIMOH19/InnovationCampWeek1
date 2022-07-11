@@ -16,6 +16,10 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- Javascript -->
     <script>
+        $(document).ready(function () {
+            view_place();
+        });
+
         function post_place() {
 
             let name = $("#name").val();
@@ -34,6 +38,37 @@
                 success: function (response) {
                     alert(response['msg']);
                     window.location.reload()
+                }
+            });
+        }
+
+        function view_place() {
+            $.ajax({
+                type: 'GET',
+                url: '/post',
+                data: {},
+                success: function (response) {
+                    $("#place-lists").empty();
+                    let places = response['places'];
+                    for (let i = 0; i < places.length; i++) {
+                        let name = places[i]['name'];
+                        let star = places[i]['star'];
+                        let review = places[i]['review'];
+                        let img_url = places[i]['img-url'];
+
+                        let temp_html = `<div class="col">
+              <div class="card">
+                <img src="${img_url}" class="card-img-top" alt="${name}">
+                <div class="card-body">
+                  <h5 class="card-title">${name}</h5>
+                  <h6 class="card-star">⭐${star}</h6>
+                  <p class="card-text">${review}</p>
+                </div>
+              </div>
+            </div>`;
+
+                        $("#place-lists").append(temp_html);
+                    }
                 }
             });
         }
@@ -105,6 +140,9 @@
             </div>
             <button onclick="post_place()" type="button" class="btn btn-warning post-btn">등록</button>
         </div>
+        <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
+        </div>
+
     </div>
 </body>
 
