@@ -8,10 +8,10 @@ from datetime import datetime, timedelta
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
-app.config.from_envvar('APP_CONFIG_FILE')
+
 
 SECRET_KEY = 'SPARTA'
-client = MongoClient(app.config['MONGO_DB_HOST'], app.config['MONGO_DB_PORT'], username=app.config['MONGO_DB_USERNAME'], password=app.config['MONGO_DB_PASSWORD'])
+client = MongoClient()
 db = client.dbsparta
 
 
