@@ -21,6 +21,7 @@ body {
     background-repeat: no-repeat;
 }
 
+<<<<<<< HEAD
 .fontcolor {
     color: aliceblue;
 }
@@ -50,4 +51,22 @@ body {
     top: 46px;
     left: 740px
 
+=======
+#post-place {
+    width: 50%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#post-place h3 {
+    text-align: center;
+}
+
+.post-btn {
+    width: 100%;
+    color: white;
+>>>>>>> 8c94217f38439f0795c373ae0ea255dec1209745
 }
