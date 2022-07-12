@@ -106,8 +106,9 @@
 <body>
 
     <div class="wrapper">
+        <div class="head-img"></div>
 
-        <button onclick="logout()">로그아웃</button>
+        <button class="btn btn-warning logout-btn" onclick="logout()">로그아웃</button>
 
         <div class="world-map-img">
             <ul class="nav justify-content-center" >
@@ -133,8 +134,8 @@
         </div>
 
         <!-- Button trigger modal -->
-        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postModal">
-            등록 <i class="fa-solid fa-plus"></i>
+        <button type="button" class="btn btn-warning post-modal-btn" data-bs-toggle="modal" data-bs-target="#postModal">
+            <span>레스토랑 등록!</span> <i class="fa-solid fa-utensils"></i>
         </button>
 
         <!-- Modal -->
@@ -212,7 +213,7 @@
                     <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
                     <div class="card-body">
                         <h5 class="card-title">{{place_name}}</h5>
-                        <h6 class="card-star">⭐{{place_star}}</h6>
+                        <h6 class="card-star">⭐ {{place_star}}</h6>
                         <p class="card-text">{{place_review}}</p>
                     </div>
                 </div>

@@ -16,12 +16,24 @@ body {
     margin-right: auto;
 }
 
+.head-img {
+    width:100%;
+    height: 100px;
+    background-image: url("../static/generatedtext.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .world-map-img {
     height: 330px;
     width: 100%;
     background-image: url('../static/world_map1.jpg');
     background-position: center;
     background-repeat: no-repeat;
+    /* background-size: cover; */
+    margin: 10px 0;
 }
 
 .fontcolor {
@@ -34,10 +46,11 @@ body {
 
 .continent-btn:hover {
     color: white;
-    background-color: #F91;
+    
 }
 
 /* 버튼 디자인 */
+
 .ALL {
     position: relative;
     top : 150px;
@@ -99,4 +112,22 @@ body {
 .card img {
     height: 300px;
     object-fit: cover;
+}
+
+/* 로그아웃 버튼 */
+.logout-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+    
+}
+
+/* 등록 모달 버튼 */
+.post-modal-btn {
+    width: 100%;
+    margin-bottom: 50px;
+}
+
+.post-modal-btn span{
+    font-weight: bold;
 }
