@@ -56,14 +56,17 @@
         }
 
         function GET_continent() {
+
             $('#post-place').show()
             let continent = $(':focus').attr('id');
             $.ajax({
                 type: 'POST',
                 url: '/posting',
+
                 data: {
                     continent_give: continent
                 },
+
                 success: function (response) {
                     console.log(response)
                     $("#place-lists").empty();
@@ -123,8 +126,11 @@
         }
     </script>
 </head>
-
-<body>
+    <body>
+        <h1 style="display: inline-block; color: white">Wold on Plate</h1>
+        <span >
+          <button style="display: inline-block; float: right" type="button" class="btn btn-outline-info">Logout</button>
+        </span>
 
 <div class="wrapper">
     <div class="world-map-img">
@@ -196,7 +202,6 @@
 <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
 
 </div>
-
 </div>
 </body>
 

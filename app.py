@@ -12,8 +12,9 @@ def main():
     return render_template('main.html')
 
 
+# 대륙별 음식점
 @app.route('/posting', methods=['POST'])
-def GET_NA():
+def get_continent():
     continent_receive = request.form['continent_give']
     na_review_list = list(db.restaurants.find({'continent': continent_receive}, {'_id': False}))
     return jsonify({'reviews': na_review_list})
@@ -47,7 +48,6 @@ def post_place():
 def view_places():
     places = list(db.restaurants.find({}, {'_id': False}))
     return jsonify({'places': places})
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
