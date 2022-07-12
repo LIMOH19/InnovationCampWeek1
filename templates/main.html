@@ -4,7 +4,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Page Title</title>
+    <title>Main | WOP</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <!-- jQuery -->
@@ -49,6 +49,11 @@
                 }
             });
         }
+
+        function sign_out() { 
+            window.location.replace("/login");
+        }
+
     </script>
 </head>
 
@@ -57,6 +62,8 @@
         <div class="world-map-img">
 
         </div>
+
+        <button onclick="sign_out()">로그아웃</button>
 
         <ul class="nav justify-content-center">
             <li class="nav-item">
@@ -157,9 +164,6 @@
             </div>
             {% endfor %}
         </div>
-
-
-
     </div>
 </body>
 

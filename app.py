@@ -34,6 +34,10 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
+# @app.route('/logout')
+# def logout():
+#     return render_template('login.html')
+
 
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
