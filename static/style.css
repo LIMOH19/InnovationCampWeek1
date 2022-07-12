@@ -3,7 +3,9 @@
 }
 
 body {
-    background-image: url("https://files.slack.com/files-pri/T03GJEFQ63V-F03PU54QF9N/mainpic.jpg");
+    background-image: url("../static/mainpic_small.jpg");
+    background-position: center;
+    background-repeat: none;
     width: 100%;
     height: 100%;
 }
@@ -22,8 +24,6 @@ body {
     background-repeat: no-repeat;
 }
 
-
-
 .fontcolor {
     color: aliceblue;
 }
@@ -37,6 +37,7 @@ body {
     background-color: #F91;
 }
 
+/* 버튼 디자인 */
 .ALL {
     position: relative;
     top : 150px;
@@ -53,14 +54,14 @@ body {
 .NA {
     position: relative;
     top: 50px;
-    left: 350px;
+    left: 330px;
 }
 
 .SA {
 
     position: relative;
     top: 200px;
-    left: 270px;
+    left: 220px;
 }
 
 .AS {
