@@ -22,3 +22,27 @@ body {
     background-repeat: no-repeat;
 }
 
+
+/* 레스토랑 등록 */
+#post-place {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#post-place h3 {
+    text-align: center;
+}
+
+.post-btn {
+    width: 100%;
+    color: white;
+}
+
+/* 레스토랑 카드 */
+.card img {
+    height: 300px;
+    object-fit: cover;
+}
