@@ -126,7 +126,10 @@ def post_place():
 
 @app.route('/<continent>')
 def continent(continent):
-    places = list(db.restaurants.find({'continent': continent}, {'_id': False}))
+    if continent == "ALL":
+        places = list(db.restaurants.find({}, {'_id': False}))
+    else:
+        places = list(db.restaurants.find({'continent': continent}, {'_id': False}))
     return render_template('main.html', places=places)
 
 if __name__ == '__main__':
