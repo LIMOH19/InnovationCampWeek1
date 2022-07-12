@@ -24,9 +24,10 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
     <script>
-        $(document).ready(function () {
 
+        $(document).ready(function () {
         });
+
 
         function post_place() {
 
@@ -42,7 +43,16 @@
             $.ajax({
                 type: 'POST',
                 url: '/post',
-                data: { name_give: name, type_give: type, continent_give: continent, star_give: star, review_give: review, img_url_give: img_url },
+
+                data: {
+                    name_give: name,
+                    type_give: type,
+                    continent_give: continent,
+                    star_give: star,
+                    review_give: review,
+                    img_url_give: img_url
+                },
+
                 success: function (response) {
                     alert(response['msg']);
                     window.location.reload()
@@ -94,10 +104,8 @@
 </head>
 
 <body>
-    <div class="wrapper">
-        <div class="world-map-img">
 
-        </div>
+    <div class="wrapper">
 
         <button onclick="logout()">로그아웃</button>
 
@@ -106,16 +114,26 @@
                 <button onclick="window.location.href='/ALL'">All</button>
             </li>
             <li class="nav-item">
-                <button onclick="window.location.href='/NA'">North America</button>
+                <button onclick="window.location.href='/NA'" class="nav-link NA" id="NA" style="color: red"
+                    href="#">North
+                    America</button>
             </li>
             <li class="nav-item">
-                <button onclick="window.location.href='/SA'">South America</button>
+                <button onclick="window.location.href='/SA'" class="nav-link SA" id="SA" style="color: red"
+                    href="#">South
+                    America</button>
             </li>
             <li class="nav-item">
-                <button onclick="window.location.href='/EU'">Europe</button>
+                <button onclick="window.location.href='/EU'" class="nav-link EU" id="EU" style="color: red"
+                    href="#">Europe</button>
             </li>
             <li class="nav-item">
-                <button onclick="window.location.href='/AS'">Asia</button>
+                <button onclick="window.location.href='/AS'" class="nav-link AS" id="AS" style=" color: red"
+                    href="#">Asia</button>
+            </li>
+            <li class="nav-item">
+                <button onclick="window.location.href='/AF'" class="nav-link AF" id="AF" style=" color: red"
+                    href="#">Africa</button>
             </li>
         </ul>
 
@@ -206,6 +224,11 @@
             </div>
             {% endfor %}
         </div>
+
+        <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
+
+        </div>
+
     </div>
 </body>
 

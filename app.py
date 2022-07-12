@@ -85,6 +85,13 @@ def check_dup():
     exists = bool(db.users.find_one({"username": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
+@app.route('/posting', methods=['POST'])
+def GET_NA():
+    continent_receive = request.form['continent_give']
+    na_review_list = list(db.restaurants.find({'continent': continent_receive}, {'_id': False}))
+    return jsonify({'reviews': na_review_list})
+
+
 # 등록하기(POST) API
 @app.route('/post', methods=['POST'])
 def post_place():
@@ -94,7 +101,6 @@ def post_place():
     star_receive = request.form['star_give']
     review_receive = request.form['review_give']
     img_url_receive = request.form['img_url_give']
-    
 
     doc = {
         'name': name_receive,
@@ -106,7 +112,6 @@ def post_place():
     }
 
     db.restaurants.insert_one(doc)
-
     return jsonify({'msg': '등록 완료!'})
 
 # # 검색어로 레스토랑 보기

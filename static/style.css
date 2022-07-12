@@ -3,6 +3,7 @@
 }
 
 body {
+    background-image: url("https://files.slack.com/files-pri/T03GJEFQ63V-F03PU54QF9N/mainpic.jpg");
     width: 100%;
     height: 100%;
 }
@@ -14,14 +15,50 @@ body {
 }
 
 .world-map-img {
-    height: 300px;
+    height: 330px;
     width: 100%;
-    background-image: url('../static/world_map.jpg');
-    background-size: cover;
+    background-image: url('../static/world_map1.jpg');
     background-position: center;
     background-repeat: no-repeat;
 }
 
+
+
+.fontcolor {
+    color: aliceblue;
+}
+
+.AF {
+    position: relative;
+    top : 150px;
+    right : 360px;
+}
+
+.NA {
+    position: relative;
+    top: 50px;
+    left: 350px;
+}
+
+.SA {
+
+    position: relative;
+    top: 200px;
+    left: 270px;
+}
+
+.AS {
+
+    position: relative;
+    top: 50px;
+    right: 300px;
+}
+
+.EU {
+    position: relative;
+    top: 80px;
+    right: 220px;
+}
 
 /* 레스토랑 등록 */
 #post-place {
