@@ -25,7 +25,7 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            view_place();
+            
         });
 
 
@@ -51,36 +51,38 @@
             });
         }
 
-        function view_place() {
-            $.ajax({
-                type: 'GET',
-                url: '/post',
-                data: {},
-                success: function (response) {
-                    $("#place-lists").empty();
-                    let places = response['places'];
-                    for (let i = 0; i < places.length; i++) {
-                        let name = places[i]['name'];
-                        let star = places[i]['star'];
-                        let review = places[i]['review'];
-                        let img_url = places[i]['img-url'];
+        // function view_place(continent) {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: '/places',
+        //         data: {},
+        //         success: function (response) {
+        //             $("#place-lists").empty();
+        //             let places = response['places'];
+        //             for (let i = 0; i < places.length; i++) {
+        //                 if (continent === places[i]['continent']) {
+        //                     let name = places[i]['name'];
+        //                     let star = places[i]['star'];
+        //                     let review = places[i]['review'];
+        //                     let img_url = places[i]['img-url'];
 
-                        let temp_html = `<div class="col">
-              <div class="card">
-                <img src="${img_url}" class="card-img-top" alt="${name}">
-                <div class="card-body">
-                  <h5 class="card-title">${name}</h5>
-                  <h6 class="card-star">⭐${star}</h6>
-                  <p class="card-text">${review}</p>
-                </div>
-              </div>
-            </div>`;
+        //                     let temp_html = `<div class="col">
+        //                                         <div class="card">
+        //                                             <img src="${img_url}" class="card-img-top" alt="${name}">
+        //                                             <div class="card-body">
+        //                                             <h5 class="card-title">${name}</h5>
+        //                                             <h6 class="card-star">⭐${star}</h6>
+        //                                             <p class="card-text">${review}</p>
+        //                                             </div>
+        //                                         </div>
+        //                                     </div>`;
 
-                        $("#place-lists").append(temp_html);
-                    }
-                }
-            });
-        }
+        //                     $("#place-lists").append(temp_html);
+        //                 }
+        //             }
+        //         }
+        //     });
+        // }
     </script>
 </head>
 
@@ -89,18 +91,33 @@
         <div class="world-map-img">
 
         </div>
+        <!-- <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <button onclick="view_place('NA')">North America</button>
+            </li>
+            <li class="nav-item">
+                <button onclick="view_place('SA')">South America</button>
+            </li>
+            <li class="nav-item">
+                <button onclick="view_place('EU')">Europe</button>
+            </li>
+            <li class="nav-item">
+                <button onclick="view_place('AS')">Asia</button>
+            </li>
+        </ul> -->
+
         <ul class="nav justify-content-center">
             <li class="nav-item">
-                <a class="nav-link" href="#">North America</a>
+                <button onclick="window.location.href='/NA'">North America</button>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">South America</a>
+                <button onclick="window.location.href='/SA'">South America</button>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Europe</a>
+                <button onclick="window.location.href='/EU'">Europe</button>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Asia</a>
+                <button onclick="window.location.href='/AS'">Asia</button>
             </li>
         </ul>
 
@@ -171,6 +188,22 @@
 
         <!-- Restaurant Cards -->
         <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
+            {% for place in places %}
+            {% set place_name = place['name'] %}
+            {% set place_star = place['star'] %}
+            {% set place_review = place['review'] %}
+            {% set place_img = place['img-url'] %}
+            <div class="col">
+                <div class="card">
+                    <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{place_name}}</h5>
+                        <h6 class="card-star">⭐{{place_star}}</h6>
+                        <p class="card-text">{{place_review}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
 
 
