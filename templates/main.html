@@ -25,7 +25,7 @@
         crossorigin="anonymous"></script>
     <script>
         $(document).ready(function () {
-            
+
         });
 
         function post_place() {
@@ -50,8 +50,44 @@
             });
         }
 
-        function sign_out() { 
-            window.location.replace("/login");
+        // function search_place() {
+        //     let word = $('#search').val();
+        //     // alert(word);
+
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: '/post',
+        //         data: { word_give: word },
+        //         success: function (response) {
+        //             let place = response['place'];
+        //             let temp_html = `<div class="col">
+        //                                 <div class="card">
+        //                                     <img src="${place['img-url']}" class="card-img-top" alt="${place['name']}">
+        //                                     <div class="card-body">
+        //                                         <h5 class="card-title">${place['name']}</h5>
+        //                                         <h6 class="card-star">⭐${place['star']}</h6>
+        //                                         <p class="card-text">${place['review']}</p>
+        //                                     </div>
+        //                                 </div>
+        //                             </div>`;
+
+        //             $('#place_lists').append(temp_html);
+        //             alert(response['msg']);
+        //         }
+        //     });
+        // }
+
+        // 로그아웃 동작
+        function logout() {
+            $.ajax({
+                type: "POST",
+                url: '/logout',
+                data: {},
+                success: function (response) {
+                    alert('See you next time');
+                    window.location.replace('/login')
+                }
+            })
         }
 
     </script>
@@ -63,7 +99,7 @@
 
         </div>
 
-        <button onclick="sign_out()">로그아웃</button>
+        <button onclick="logout()">로그아웃</button>
 
         <ul class="nav justify-content-center">
             <li class="nav-item">
@@ -144,6 +180,9 @@
                 </div>
             </div>
         </div>
+
+        <p>Search</p>
+        <input id="search" type="text" /><button onclick="search_place()">Search</button>
 
         <!-- Restaurant Cards -->
         <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">

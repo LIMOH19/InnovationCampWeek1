@@ -1,3 +1,4 @@
+from flask.helpers import make_response
 from pymongo import MongoClient
 import jwt
 import hashlib
@@ -34,9 +35,13 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
-# @app.route('/logout')
-# def logout():
-#     return render_template('login.html')
+@app.route('/logout', methods=['POST'])
+def logout():
+    # 쿠키에서 token 삭제
+    response = make_response()
+    response.delete_cookie('mytoken')
+    # print(response)
+    return response
 
 
 @app.route('/sign_in', methods=['POST'])
@@ -104,6 +109,12 @@ def post_place():
 
     return jsonify({'msg': '등록 완료!'})
 
+# # 검색어로 레스토랑 보기
+# @app.route('/post', methods=['GET'])
+# def search_place():
+#     word_receive = request.form['word_give']
+#     place = db.restaurants.find_one({'name': word_receive}, {'_id': False})
+#     return jsonify({'msg': 'Search Complete', 'place': place})
 
 # 주문 목록보기(Read) API
 # @app.route('/places', methods=['GET'])
