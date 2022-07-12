@@ -12,7 +12,7 @@ app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
 client = MongoClient('localhost', 27017)
-db = client.dbsparta
+db = client.week_one
 
 
 ## HTML 화면 보여주기
