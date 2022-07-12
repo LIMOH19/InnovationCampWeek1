@@ -3,12 +3,13 @@
 }
 
 body {
+    background-image: https://files.slack.com/files-pri/T03GJEFQ63V-F03PU54QF9N/mainpic.jpg;
     width: 100%;
     height: 100%;
 }
 
 .wrapper {
-    width: 80%;
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -21,37 +22,43 @@ body {
     background-repeat: no-repeat;
 }
 
-<<<<<<< HEAD
 .fontcolor {
     color: aliceblue;
 }
 
+.AF {
+    position: relative;
+    top : 150px;
+    right : 360px;
+}
+
 .NA {
-    position: absolute;
+    position: relative;
     top: 50px;
-    right: 750px;
+    left: 350px;
 }
 
 .SA {
 
-    position: absolute;
+    position: relative;
     top: 200px;
-    right: 670px;
+    left: 270px;
 }
 
 .AS {
 
-    position: absolute;
-    top: 70px;
-    left: 850px;
+    position: relative;
+    top: 50px;
+    right: 300px;
 }
 
 .EU {
-    position: absolute;
-    top: 46px;
-    left: 740px
+    position: relative;
+    top: 80px;
+    right: 220px;
+}
 
-=======
+
 #post-place {
     width: 50%;
     max-width: 500px;
@@ -68,5 +75,4 @@ body {
 .post-btn {
     width: 100%;
     color: white;
->>>>>>> 8c94217f38439f0795c373ae0ea255dec1209745
 }
