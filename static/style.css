@@ -34,6 +34,7 @@ body {
     color: aliceblue;
 }
 
+
 .AF {
     position: relative;
     top : 150px;
@@ -89,5 +90,6 @@ body {
 /* 레스토랑 카드 */
 .card img {
     height: 200px;
+    height: 300px;
     object-fit: cover;
 }
