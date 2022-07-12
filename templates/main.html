@@ -109,33 +109,28 @@
 
         <button onclick="logout()">로그아웃</button>
 
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <button onclick="window.location.href='/ALL'">All</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/NA'" class="nav-link NA" id="NA" style="color: red"
-                    href="#">North
-                    America</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/SA'" class="nav-link SA" id="SA" style="color: red"
-                    href="#">South
-                    America</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/EU'" class="nav-link EU" id="EU" style="color: red"
-                    href="#">Europe</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/AS'" class="nav-link AS" id="AS" style=" color: red"
-                    href="#">Asia</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/AF'" class="nav-link AF" id="AF" style=" color: red"
-                    href="#">Africa</button>
-            </li>
-        </ul>
+        <div class="world-map-img">
+            <ul class="nav justify-content-center" >
+                <li class="nav-item">
+                    <button onclick="window.location.href='/ALL'" class="continent-btn ALL">All</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/NA'" class="continent-btn NA">North America</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/SA'" class="continent-btn SA">South America</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/EU'" class="continent-btn EU">Europe</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/AS'" class="continent-btn AS" >Asia</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/AF'" class="continent-btn AF" >Africa</button>
+                </li>
+            </ul>
+        </div>
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#postModal">
