@@ -282,7 +282,7 @@
         {% set place_star = place['star'] %}
         {% set place_review = place['review'] %}
         {% set place_img = place['img-url'] %}
-        {% set star_img = '⭐'*place_star %}
+        {% set star_img = '⭐'*place_star|int %}
         <div class="col">
             <div class="card">
                 <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
