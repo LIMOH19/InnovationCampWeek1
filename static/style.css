@@ -41,11 +41,6 @@ body {
       display: inline-block;
 }
 
-.logout {
-      display: inline-block;
-
-}
-
 .fontcolor {
     color: aliceblue;
 }
@@ -58,8 +53,8 @@ body {
 }
 
 .continent-btn:hover {
-    color: black;
-    
+    color: #FFBB11;
+    background-color: black;
 }
 
 /* 버튼 디자인 */
@@ -139,7 +134,7 @@ body {
     margin-bottom: 5px;
 }
 
-.post-modal-btn span{
+span{
     font-weight: bold;
 }
 
