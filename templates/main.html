@@ -148,7 +148,6 @@
             for (let i = 0; i < listInner.length; i++) {
                 store = listInner[i].getElementsByClassName("card-title");
                 if (store[0].innerHTML.toLowerCase().indexOf(search) != -1) {
-                    console.log(store[0].innerHTML)
                     listInner[i].style.display = "flex"
                 } else {
                     listInner[i].style.display = "none"
