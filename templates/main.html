@@ -31,12 +31,12 @@
         });
 
         function find_store() {
+
             $('#place-lists').empty()
             if ($('#input-store').val() == '') {
                 alert('검색어 입력하세요!')
                 window.location.reload()
-            }
-            else {
+            } else {
                 let keyword = $('#input-store').val()
                 console.log(keyword)
                 $.ajax({
@@ -48,7 +48,7 @@
                         let row = rows['search_list']
                         console.log(rows['search_list']) // 검색어를 입력한 후, 콘솔창에 데이터가 잘 들어왔는지 확인해 봅시다.
                         for (let i = 0; i < row.length; i++) {
-                            let img = row[i]['img_url']
+                            let img = row[i]['img-url']
                             let name = row[i]['name']
                             let star = row[i]['star']
                             let review = row[i]['review']
@@ -68,6 +68,8 @@
                         }
                         alert(response["msg"])
                     }
+
+
                 })
             }
         }
@@ -130,14 +132,19 @@
         //     });
         // }
 
+        // 검색 필터링 기능
         function filter() {
+
+            //엔터키 눌렀을때 검색
+            if (window.event.keyCode == 13) {
+                find_store()
+            }
 
             let search = document.getElementById("input-store").value.toLowerCase();
             let listInner = document.getElementsByClassName("card");
 
             for (let i = 0; i < listInner.length; i++) {
                 store = listInner[i].getElementsByClassName("card-title");
-                console.log(store);
                 if (store[0].innerHTML.toLowerCase().indexOf(search) != -1) {
                     listInner[i].style.display = "flex"
                 } else {
@@ -194,101 +201,104 @@
             <div class="input-group mb-3 searchbar">
                 <input id="input-store" type="text" class="form-control" aria-label="Recipient's username"
                     aria-describedby="button-addon2" onkeyup="filter()">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="find_store()"><span>검색 <i
-                        class="fa fa-search"></i> </span></button>
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                    onclick="find_store()"><span>검색 <i class="fa fa-search"></i> </span></button>
             </div>
 
-        </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modal-title">레스토랑 등록</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- <div id="post-place"> -->
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">이름</span>
-                            <input id="name" type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="inputGroup-sizing-default">
+            <!-- Modal -->
+            <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-title">레스토랑 등록</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text">종류</span>
-                            <input id="type" type="text" class="form-control" aria-label="Sizing example input"
-                                aria-describedby="inputGroup-sizing-default">
+                        <div class="modal-body">
+                            <!-- <div id="post-place"> -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">이름</span>
+                                <input id="name" type="text" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">종류</span>
+                                <input id="type" type="text" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect01">대륙</label>
+                                <select class="form-select" id="continent">
+                                    <option disabled selected>선택 안함</option>
+                                    <option value="AS">아시아</option>
+                                    <option value="EU">유럽</option>
+                                    <option value="SA">남아메리카</option>
+                                    <option value="NA">북아메리카</option>
+                                    <option value="AF">아프리카</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect01">별점</label>
+                                <select class="form-select" id="star">
+                                    <option disabled selected>선택</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">리뷰</span>
+                                <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            <label for="basic-url" class="form-label">이미지 URL</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="img-url" aria-describedby="basic-addon3">
+                            </div>
+                            <button onclick="post_place()" type="button" class="btn btn-warning post-btn">등록</button>
+                            <!-- </div> -->
                         </div>
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="inputGroupSelect01">대륙</label>
-                            <select class="form-select" id="continent">
-                                <option disabled selected>선택 안함</option>
-                                <option value="AS">아시아</option>
-                                <option value="EU">유럽</option>
-                                <option value="SA">남아메리카</option>
-                                <option value="NA">북아메리카</option>
-                                <option value="AF">아프리카</option>
-                            </select>
-                        </div>
-                        <div class="input-group mb-3">
-                            <label class="input-group-text" for="inputGroupSelect01">별점</label>
-                            <select class="form-select" id="star">
-                                <option disabled selected>선택</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <span class="input-group-text">리뷰</span>
-                            <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
-                        </div>
-                        <label for="basic-url" class="form-label">이미지 URL</label>
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control" id="img-url" aria-describedby="basic-addon3">
-                        </div>
-                        <button onclick="post_place()" type="button" class="btn btn-warning post-btn">등록</button>
-                        <!-- </div> -->
-                    </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-
-        <!-- <p>Search</p> -->
-        <!-- <input id="search" type="text" /><button onclick="search_place()">Search</button> -->
-
-        <!-- Restaurant Cards -->
-        <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
-            {% for place in places %}
-            {% set place_name = place['name'] %}
-            {% set place_star = place['star'] %}
-            {% set place_review = place['review'] %}
-            {% set place_img = place['img-url'] %}
-            <div class="col">
-                <div class="card">
-                    <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{place_name}}</h5>
-                        <h6 class="card-star">⭐{{place_star}}</h6>
-                        <p class="card-text">{{place_review}}</p>
+                        <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div> -->
                     </div>
                 </div>
             </div>
-            {% endfor %}
+
+            <!-- <p>Search</p> -->
+            <!-- <input id="search" type="text" /><button onclick="search_place()">Search</button> -->
+
+            <!-- Restaurant Cards -->
+            <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
+                {% for place in places %}
+                {% set place_name = place['name'] %}
+                {% set place_star = place['star'] %}
+                {% set place_review = place['review'] %}
+                {% set place_img = place['img-url'] %}
+                {% set star_img = '⭐'*place_star|int %}
+                <div class="col">
+                    <div class="card">
+                        <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{place_name}}</h5>
+                            <h6 class="card-star">{{star_img}}</h6>
+                            <p class="card-text">{{place_review}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
+
+            </div>
+            <div class="bottom">
+                <button class="btn btn-warning logout-btn" onclick="logout()"><span>로그아웃</span></button>
+            </div>
         </div>
 
-        <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
-
-        </div>
-        <div class="bottom">
-            <button class="btn btn-warning logout-btn" onclick="logout()"><span>로그아웃</span></button>
-        </div>
     </div>
 </body>
 
