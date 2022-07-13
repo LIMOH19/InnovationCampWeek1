@@ -51,13 +51,14 @@
                             let name = row[i]['name']
                             let star = row[i]['star']
                             let review = row[i]['review']
+                            let star_image= '⭐'.repeat(star)
 
                             let temp_html = `<div class="col">
                                          <div class="card">
                                              <img src="${img}" class="card-img-top" alt="${name}">
                                              <div class="card-body">
                                                  <h5 class="card-title">${name}</h5>
-                                                 <h6 class="card-star">⭐${star}</h6>
+                                                 <h6 class="card-star">${star_image}</h6>
                                                  <p class="card-text">${review}</p>
                                              </div>
                                          </div>
@@ -271,12 +272,13 @@
             {% set place_star = place['star'] %}
             {% set place_review = place['review'] %}
             {% set place_img = place['img-url'] %}
+            {% set star_img = '⭐'*place_star %}
             <div class="col">
                 <div class="card">
                     <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
                     <div class="card-body">
                         <h5 class="card-title">{{place_name}}</h5>
-                        <h6 class="card-star">⭐ {{place_star}}</h6>
+                        <h6 class="card-star">{{star_img}}</h6>
                         <p class="card-text">{{place_review}}</p>
                     </div>
                 </div>

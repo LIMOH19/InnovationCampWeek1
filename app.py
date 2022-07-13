@@ -115,7 +115,7 @@ def post_place():
         'name': name_receive,
         'type': type_receive,
         'continent': continent_receive,
-        'star': star_receive,
+        'star': int(star_receive),
         'review': review_receive,
         'img-url': img_url_receive,
     }
