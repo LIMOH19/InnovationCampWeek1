@@ -4,12 +4,15 @@
 
 body {
     background-image: url('../static/bgi.jpg');
+    background-image: url("../static/mainpic_small.jpg");
+    background-position: center;
+    background-repeat: none;
     width: 100%;
     height: 100%;
 }
 
 .wrapper {
-    width: 100%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -30,44 +33,59 @@ body {
       display: inline-block;
 
 }
+
 .fontcolor {
     color: aliceblue;
 }
 
+.continent-btn {
+    border-radius: 5px;
+}
+
+.continent-btn:hover {
+    color: white;
+    background-color: #F91;
+}
+
+/* 버튼 디자인 */
+.ALL {
+    position: relative;
+    top : 150px;
+    left: 300px;
+    padding: 30px;
+}
 
 .AF {
     position: relative;
     top : 150px;
-    right : 360px;
+    right : 400px;
 }
 
 .NA {
     position: relative;
     top: 50px;
-    left: 350px;
+    left: 330px;
 }
 
 .SA {
 
     position: relative;
     top: 200px;
-    left: 270px;
+    left: 220px;
 }
 
 .AS {
 
     position: relative;
     top: 50px;
-    right: 300px;
+    right: 200px;
 }
 
 .EU {
     position: relative;
-    top: 80px;
-    right: 220px;
+    top: 50px;
+    right: 320px;
 }
-
-
 
 /* 레스토랑 등록 */
 #post-place {
