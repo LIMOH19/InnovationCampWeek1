@@ -13,6 +13,8 @@
     <!-- External CSS -->
     <link rel='stylesheet' type='text/css' media='screen' href='../static/style.css'>
     <!-- Bootstrap CSS -->
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- FontAwesome -->
@@ -24,10 +26,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
+    <!-- file upload library -->
+    <script src="https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.js"></script>
+
     <script>
 
         $(document).ready(function () {
-
+            bsCustomFileInput.init()
         });
 
         function find_store() {
@@ -48,15 +53,14 @@
                         let row = rows['search_list']
                         console.log(rows['search_list']) // 검색어를 입력한 후, 콘솔창에 데이터가 잘 들어왔는지 확인해 봅시다.
                         for (let i = 0; i < row.length; i++) {
-                            let img = row[i]['img-url']
+                            let file = row[i]['file']
                             let name = row[i]['name']
                             let star = row[i]['star']
                             let review = row[i]['review']
                             let star_image = '⭐'.repeat(star)
-
                             let temp_html = `<div class="col">
                                          <div class="card">
-                                             <img src="${img}" class="card-img-top" alt="${name}">
+                                             <img src="../static/${file}" class="card-img-top" alt="${name}">
                                              <div class="card-body">
                                                  <h5 class="card-title">${name}</h5>
                                                  <h6 class="card-star">${star_image}</h6>
@@ -74,8 +78,39 @@
             }
         }
 
-
         function post_place() {
+            let name = $("#name").val();
+            let type = $("#type").val();
+            let continent = $("#continent").val();
+            let star = $("#star").val();
+            let review = $("#review").val();
+            let file = $('#img_file')[0].files[0]
+
+            let form_data = new FormData()
+
+            form_data.append("name_give", name)
+            form_data.append("type_give", type)
+            form_data.append("continent_give", continent)
+            form_data.append("star_give", star)
+            form_data.append("review_give", review)
+            form_data.append("file_give", file)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/post",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+
+         /*   function post_place() {
 
             let name = $("#name").val();
             let type = $("#type").val();
@@ -84,11 +119,11 @@
             let review = $("#review").val();
             let img_url = $("#img-url").val();
 
+
             // console.log(name, type, continent, star, review, img_url);
             $.ajax({
                 type: 'POST',
                 url: '/post',
-
                 data: {
                     name_give: name,
                     type_give: type,
@@ -104,7 +139,7 @@
                 }
             });
         }
-
+                */
         // function search_place() {
         //     let word = $('#search').val();
         //     // alert(word);
@@ -252,10 +287,14 @@
                                 <span class="input-group-text">리뷰</span>
                                 <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
                             </div>
-                            <label for="basic-url" class="form-label">이미지 URL</label>
+                            <div class="mb-3">
+                              <label for="img_file" class="form-label">파일을 선택하세요</label>
+                              <input class="form-control" type="file" id="img_file">
+                            </div>
+                        <!--    <label for="basic-url" class="form-label">이미지 URL</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" id="img-url" aria-describedby="basic-addon3">
-                            </div>
+                            </div> -->
                             <button onclick="post_place()" type="button" class="btn btn-warning post-btn">등록</button>
                             <!-- </div> -->
                         </div>
@@ -276,10 +315,11 @@
                 {% set place_star = place['star'] %}
                 {% set place_review = place['review'] %}
                 {% set place_img = place['img-url'] %}
+                {% set img_file = place['file'] %}
                 {% set star_img = '⭐'*place_star|int %}
                 <div class="col">
                     <div class="card">
-                        <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
+                        <img src="{{ url_for('static',filename=img_file) }}" class="card-img-top" alt="{{place_name}}">
                         <div class="card-body">
                             <h5 class="card-title">{{place_name}}</h5>
                             <h6 class="card-star">{{star_img}}</h6>
