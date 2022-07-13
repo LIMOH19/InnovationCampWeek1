@@ -49,14 +49,12 @@
                         } else {
                             let rows = response['search_list']
                             let row = rows['search_list']
-                            console.log(rows['search_list']) // 검색어를 입력한 후, 콘솔창에 데이터가 잘 들어왔는지 확인해 봅시다.
                             for (let i = 0; i < row.length; i++) {
                                 let img = row[i]['img_url']
                                 let name = row[i]['name']
                                 let star = row[i]['star']
                                 let review = row[i]['review']
                                 let star_image = '⭐'.repeat(star)
-
                                 let temp_html = `<div class="col">
                                          <div class="card">
                                              <img src="${img}" class="card-img-top" alt="${name}">
@@ -136,6 +134,7 @@
         //     });
         // }
 
+        // 검색 필터링 기능
         function filter() {
 
             //엔터키 눌렀을때 검색
@@ -148,8 +147,8 @@
 
             for (let i = 0; i < listInner.length; i++) {
                 store = listInner[i].getElementsByClassName("card-title");
-                console.log(store);
                 if (store[0].innerHTML.toLowerCase().indexOf(search) != -1) {
+                    console.log(store[0].innerHTML)
                     listInner[i].style.display = "flex"
                 } else {
                     listInner[i].style.display = "none"
