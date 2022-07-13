@@ -88,16 +88,21 @@
         // }
 
         // 로그아웃 동작
+        // function logout() {
+        //     $.ajax({
+        //         type: "POST",
+        //         url: '/logout',
+        //         data: {},
+        //         success: function (response) {
+        //             alert('See you next time');
+        //             window.location.replace('/login')
+        //         }
+        //     })
+        // }
         function logout() {
-            $.ajax({
-                type: "POST",
-                url: '/logout',
-                data: {},
-                success: function (response) {
-                    alert('See you next time');
-                    window.location.replace('/login')
-                }
-            })
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!');
+            window.location.href = '/';
         }
 
     </script>

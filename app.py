@@ -35,13 +35,13 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
-@app.route('/logout', methods=['POST'])
-def logout():
-    # 쿠키에서 token 삭제
-    response = make_response()
-    response.delete_cookie('mytoken')
-    # print(response)
-    return response
+# @app.route('/logout', methods=['POST'])
+# def logout():
+#     # 쿠키에서 token 삭제
+#     response = make_response()
+#     response.delete_cookie('mytoken')
+#     # print(response)
+#     return response
 
 
 @app.route('/sign_in', methods=['POST'])
