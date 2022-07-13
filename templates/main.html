@@ -9,20 +9,21 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <!-- External CSS -->
     <link rel='stylesheet' type='text/css' media='screen' href='../static/style.css'>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <!-- FontAwesome -->
     <script src="https://kit.fontawesome.com/1f4882c357.js" crossorigin="anonymous"></script>
     <!-- Javascript -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
-            integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
-            crossorigin="anonymous"></script>
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+        crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-            integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
-            crossorigin="anonymous"></script>
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+        crossorigin="anonymous"></script>
     <script>
 
         $(document).ready(function () {
@@ -33,7 +34,7 @@
 
             $('#place-lists').empty()
             if ($('#input-store').val() == '') {
-                alert('검색어를 입력하세요!')
+                alert('검색어 입력하세요!')
                 window.location.reload()
             } else {
                 let keyword = $('#input-store').val()
@@ -43,19 +44,17 @@
                     url: "/search?store_give=" + keyword,
                     data: {},
                     success: function (response) {
-                        console.log("response:", response)
-                        if (response['search_list']['search_list'] == '') {
-                            alert("해당하는 음식점이 없습니다!")
-                        } else {
-                            let rows = response['search_list']
-                            let row = rows['search_list']
-                            for (let i = 0; i < row.length; i++) {
-                                let img = row[i]['img_url']
-                                let name = row[i]['name']
-                                let star = row[i]['star']
-                                let review = row[i]['review']
-                                let star_image = '⭐'.repeat(star)
-                                let temp_html = `<div class="col">
+                        let rows = response['search_list']
+                        let row = rows['search_list']
+                        console.log(rows['search_list']) // 검색어를 입력한 후, 콘솔창에 데이터가 잘 들어왔는지 확인해 봅시다.
+                        for (let i = 0; i < row.length; i++) {
+                            let img = row[i]['img-url']
+                            let name = row[i]['name']
+                            let star = row[i]['star']
+                            let review = row[i]['review']
+                            let star_image = '⭐'.repeat(star)
+
+                            let temp_html = `<div class="col">
                                          <div class="card">
                                              <img src="${img}" class="card-img-top" alt="${name}">
                                              <div class="card-body">
@@ -65,13 +64,12 @@
                                              </div>
                                          </div>
                                      </div>`
-                                $('#place-lists').append(temp_html)
-                            }
-                            alert(response["msg"])
+                            $('#place-lists').append(temp_html)
                         }
-
-
+                        alert(response["msg"])
                     }
+
+
                 })
             }
         }
@@ -138,7 +136,7 @@
         function filter() {
 
             //엔터키 눌렀을때 검색
-            if (window.event.keyCode == 13 ) {
+            if (window.event.keyCode == 13) {
                 find_store()
             }
 
@@ -157,15 +155,9 @@
 
         // 로그아웃 동작
         function logout() {
-            $.ajax({
-                type: "POST",
-                url: '/logout',
-                data: {},
-                success: function (response) {
-                    alert('See you next time');
-                    window.location.replace('/login')
-                }
-            })
+            $.removeCookie('mytoken', { path: '/' });
+            alert('로그아웃!');
+            window.location.href = '/login';
         }
 
     </script>
@@ -173,134 +165,141 @@
 
 <body>
 
-<div class="wrapper">
-    <div class="head-img"></div>
+    <div class="wrapper">
+        <div class="head-img"></div>
 
-    <button class="btn btn-warning logout-btn" onclick="logout()">로그아웃</button>
+        <div class="world-map-img">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <button onclick="window.location.href='/ALL'" class="continent-btn ALL">All</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/NA'" class="continent-btn NA">North America</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/SA'" class="continent-btn SA">South America</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/EU'" class="continent-btn EU">Europe</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/AS'" class="continent-btn AS">Asia</button>
+                </li>
+                <li class="nav-item">
+                    <button onclick="window.location.href='/AF'" class="continent-btn AF">Africa</button>
+                </li>
+            </ul>
+        </div>
 
-    <div class="world-map-img">
-        <ul class="nav justify-content-center">
-            <li class="nav-item">
-                <button onclick="window.location.href='/ALL'" class="continent-btn ALL">All</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/NA'" class="continent-btn NA">North America</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/SA'" class="continent-btn SA">South America</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/EU'" class="continent-btn EU">Europe</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/AS'" class="continent-btn AS">Asia</button>
-            </li>
-            <li class="nav-item">
-                <button onclick="window.location.href='/AF'" class="continent-btn AF">Africa</button>
-            </li>
-        </ul>
-    </div>
+        <div class="search-post-container">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-warning post-modal-btn" data-bs-toggle="modal"
+                data-bs-target="#postModal">
+                <span>레스토랑 등록!</span> <i class="fa-solid fa-utensils"></i>
+            </button>
 
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-warning post-modal-btn" data-bs-toggle="modal" data-bs-target="#postModal">
-        <span>레스토랑 등록!</span> <i class="fa-solid fa-utensils"></i>
-    </button>
+            <div class="input-group mb-3 searchbar">
+                <input id="input-store" type="text" class="form-control" aria-label="Recipient's username"
+                    aria-describedby="button-addon2" onkeyup="filter()">
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                    onclick="find_store()"><span>검색 <i class="fa fa-search"></i> </span></button>
+            </div>
 
-    <div class="search-box d-flex justify-content-center">
-        <input id="input-store" class="form-control"  style="margin-right: 0.5rem; width: 10rem" onkeyup="filter()">
-        <button class="button is-primary is-buton" onclick="find_store()">검색<i class="fa fa-search"></i>
-        </button>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal-title">레스토랑 등록</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <!-- <div id="post-place"> -->
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">이름</span>
-                        <input id="name" type="text" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text">종류</span>
-                        <input id="type" type="text" class="form-control" aria-label="Sizing example input"
-                               aria-describedby="inputGroup-sizing-default">
-                    </div>
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">대륙</label>
-                        <select class="form-select" id="continent">
-                            <option disabled selected>선택 안함</option>
-                            <option value="AS">아시아</option>
-                            <option value="EU">유럽</option>
-                            <option value="SA">남아메리카</option>
-                            <option value="NA">북아메리카</option>
-                            <option value="AF">아프리카</option>
-                        </select>
-                    </div>
-                    <div class="input-group mb-3">
-                        <label class="input-group-text" for="inputGroupSelect01">별점</label>
-                        <select class="form-select" id="star">
-                            <option disabled selected>선택</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text">리뷰</span>
-                        <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
-                    </div>
-                    <label for="basic-url" class="form-label">이미지 URL</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" id="img-url" aria-describedby="basic-addon3">
-                    </div>
-                    <button onclick="post_place()" type="button" class="btn btn-warning post-btn">등록</button>
-                    <!-- </div> -->
-                </div>
-                <!-- <div class="modal-footer">
+            <!-- Modal -->
+            <div class="modal fade" id="postModal" tabindex="-1" aria-labelledby="modal-title" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modal-title">레스토랑 등록</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- <div id="post-place"> -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">이름</span>
+                                <input id="name" type="text" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">종류</span>
+                                <input id="type" type="text" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-default">
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect01">대륙</label>
+                                <select class="form-select" id="continent">
+                                    <option disabled selected>선택 안함</option>
+                                    <option value="AS">아시아</option>
+                                    <option value="EU">유럽</option>
+                                    <option value="SA">남아메리카</option>
+                                    <option value="NA">북아메리카</option>
+                                    <option value="AF">아프리카</option>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <label class="input-group-text" for="inputGroupSelect01">별점</label>
+                                <select class="form-select" id="star">
+                                    <option disabled selected>선택</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-text">리뷰</span>
+                                <textarea id="review" class="form-control" aria-label="With textarea"></textarea>
+                            </div>
+                            <label for="basic-url" class="form-label">이미지 URL</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" id="img-url" aria-describedby="basic-addon3">
+                            </div>
+                            <button onclick="post_place()" type="button" class="btn btn-warning post-btn">등록</button>
+                            <!-- </div> -->
+                        </div>
+                        <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div> -->
-            </div>
-        </div>
-    </div>
-
-    <!-- <p>Search</p> -->
-    <!-- <input id="search" type="text" /><button onclick="search_place()">Search</button> -->
-
-    <!-- Restaurant Cards -->
-    <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
-        {% for place in places %}
-        {% set place_name = place['name'] %}
-        {% set place_star = place['star'] %}
-        {% set place_review = place['review'] %}
-        {% set place_img = place['img-url'] %}
-        {% set star_img = '⭐'*place_star %}
-        <div class="col">
-            <div class="card">
-                <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{place_name}}</h5>
-                    <h6 class="card-star">{{star_img}}</h6>
-                    <p class="card-text">{{place_review}}</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- <p>Search</p> -->
+            <!-- <input id="search" type="text" /><button onclick="search_place()">Search</button> -->
+
+            <!-- Restaurant Cards -->
+            <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
+                {% for place in places %}
+                {% set place_name = place['name'] %}
+                {% set place_star = place['star'] %}
+                {% set place_review = place['review'] %}
+                {% set place_img = place['img-url'] %}
+                {% set star_img = '⭐'*place_star|int %}
+                <div class="col">
+                    <div class="card">
+                        <img src="{{place_img}}" class="card-img-top" alt="{{place_name}}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{place_name}}</h5>
+                            <h6 class="card-star">{{star_img}}</h6>
+                            <p class="card-text">{{place_review}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+
+            <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
+
+            </div>
+            <div class="bottom">
+                <button class="btn btn-warning logout-btn" onclick="logout()"><span>로그아웃</span></button>
+            </div>
         </div>
-        {% endfor %}
-    </div>
-
-    <div id="place-lists" class="row row-cols-1 row-cols-md-3 g-4">
 
     </div>
-
-</div>
 </body>
 
 </html>
