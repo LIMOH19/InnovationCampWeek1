@@ -52,10 +52,13 @@ body {
 
 .continent-btn {
     border-radius: 5px;
+    font-weight: bold;
+    color:white;
+    background-color:#FFBB11;
 }
 
 .continent-btn:hover {
-    color: white;
+    color: black;
     
 }
 
@@ -66,6 +69,7 @@ body {
     top : 150px;
     left: 300px;
     padding: 30px;
+    border-radius: 50%;
 }
 
 .AF {
@@ -127,18 +131,20 @@ body {
 
 /* 로그아웃 버튼 */
 .logout-btn {
-    display: block;
-    margin-left: auto;
-    margin-right: 0;
-    
+    font-weight: bold;
 }
 
-/* 등록 모달 버튼 */
 .post-modal-btn {
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 5px;
 }
 
 .post-modal-btn span{
     font-weight: bold;
+}
+
+.bottom {
+    margin: 100px 0 30px;
+    display: flex;
+    justify-content: center;
 }
