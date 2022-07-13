@@ -45,7 +45,6 @@
                     success: function (response) {
                         let rows = response['search_list']
                         let row = rows['search_list']
-                        console.log(rows['search_list']) // 검색어를 입력한 후, 콘솔창에 데이터가 잘 들어왔는지 확인해 봅시다.
                         for (let i = 0; i < row.length; i++) {
                             let img = row[i]['img_url']
                             let name = row[i]['name']

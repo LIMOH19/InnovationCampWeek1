@@ -66,14 +66,14 @@ def sign_in():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
-@app.route('/search', methods=['GET']) # /search로 키워드를 받아 빵집 이름과 일치 결과를 찾아냅니다.
+@app.route('/search', methods=['GET']) # /search로 키워드를 받아 식당 이름과 일치 결과를 찾아냅니다.
 def search_get():
    doc = [] # 검색을 마친 자료가 들어갈 배열입니다.
    store_receive = request.args.get('store_give') # Ajax에서 store_give로 보낸 데이터를 받습니다.
-   stores = list(db.restaurants.find({},{'_id':False})) # 빵집의 전체 목록을 stores 변수로 받아옵니다.
+   stores = list(db.restaurants.find({},{'_id':False})) # 식당의 전체 목록을 stores 변수로 받아옵니다.
    for store in stores:
     if store_receive in store['name']: # store_receive로 받은 검색어를 찾아봅니다.
-         doc.append(store) # 일치하는 빵집을 doc 배열에 집어넣습니다.
+         doc.append(store) # 일치하는 식당을 doc 배열에 집어넣습니다.
    print('doc : ',doc)
    search_list = {'search_list':doc} # API로 전달할 수 있는 자료에 배열 형태는 없으므로, 딕셔너리로 만들어야 합니다.
    return jsonify({'search_list':search_list, 'msg':'검색완료!'})
