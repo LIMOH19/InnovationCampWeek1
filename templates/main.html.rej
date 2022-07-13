@@ -1,9 +1,0 @@
-diff a/templates/main.html b/templates/main.html	(rejected hunks)
-@@ -106,6 +106,7 @@
- <body>
- 
-     <div class="wrapper">
-+        <div class="head-img"></div>
- 
-         <button class="btn btn-warning logout-btn" onclick="logout()">로그아웃</button>
- 
