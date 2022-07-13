@@ -10,7 +10,6 @@ app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
-
 SECRET_KEY = 'SPARTA'
 client = MongoClient('localhost', 27017)
 db = client.week_one
@@ -21,7 +20,7 @@ db = client.week_one
 def home():
     token_receive = request.cookies.get('mytoken')
     try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256']) # 로그인 확인
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])  # 로그인 확인
 
         return render_template('main.html')
     except jwt.ExpiredSignatureError:
@@ -41,7 +40,7 @@ def sign_in():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
 
-    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest() #인코딩
+    pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()  # 인코딩
     result = db.users.find_one({'username': username_receive, 'password': pw_hash})
 
     if result is not None:
@@ -57,14 +56,26 @@ def sign_in():
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
 
 
+@app.route('/search', methods=['GET']) # /search로 키워드를 받아 식당 이름과 일치 결과를 찾아냅니다.
+def search_get():
+   doc = [] # 검색을 마친 자료가 들어갈 배열입니다.
+   store_receive = request.args.get('store_give') # Ajax에서 store_give로 보낸 데이터를 받습니다.
+   stores = list(db.restaurants.find({},{'_id':False})) # 식당의 전체 목록을 stores 변수로 받아옵니다.
+   for store in stores:
+    if store_receive in store['name']: # store_receive로 받은 검색어를 찾아봅니다.
+         doc.append(store) # 일치하는 식당을 doc 배열에 집어넣습니다.
+   print('doc : ',doc)
+   search_list = {'search_list':doc} # API로 전달할 수 있는 자료에 배열 형태는 없으므로, 딕셔너리로 만들어야 합니다.
+   return jsonify({'search_list':search_list, 'msg':'검색완료!'})
+
 @app.route('/sign_up/save', methods=['POST'])
 def sign_up():
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "username": username_receive,                               # 아이디
-        "password": password_hash,                                  # 비밀번호
+        "username": username_receive,  # 아이디
+        "password": password_hash,  # 비밀번호
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
@@ -76,11 +87,8 @@ def check_dup():
     exists = bool(db.users.find_one({"username": username_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
-@app.route('/posting', methods=['POST'])
-def GET_NA():
-    continent_receive = request.form['continent_give']
-    na_review_list = list(db.restaurants.find({'continent': continent_receive}, {'_id': False}))
-    return jsonify({'reviews': na_review_list})
+
+
 
 
 # 등록하기(POST) API
@@ -97,13 +105,14 @@ def post_place():
         'name': name_receive,
         'type': type_receive,
         'continent': continent_receive,
-        'star': star_receive,
+        'star': int(star_receive),
         'review': review_receive,
         'img-url': img_url_receive,
     }
 
     db.restaurants.insert_one(doc)
     return jsonify({'msg': '등록 완료!'})
+
 
 # # 검색어로 레스토랑 보기
 # @app.route('/post', methods=['GET'])
@@ -115,7 +124,7 @@ def post_place():
 # 주문 목록보기(Read) API
 # @app.route('/places', methods=['GET'])
 # def view_places():
-    
+
 #     places = list(db.restaurants.find({}, {'_id': False}))
 
 #     return jsonify({'places': places})
@@ -128,7 +137,7 @@ def continent(continent):
         places = list(db.restaurants.find({'continent': continent}, {'_id': False}))
     return render_template('main.html', places=places)
 
+
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
-
 

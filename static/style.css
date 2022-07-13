@@ -3,6 +3,7 @@
 }
 
 body {
+    background-image: url('../static/bgi.jpg');
     background-image: url("../static/mainpic_small.jpg");
     background-position: center;
     background-repeat: none;
@@ -34,6 +35,15 @@ body {
     background-repeat: no-repeat;
     /* background-size: cover; */
     margin: 10px 0;
+}
+
+.h1 {
+      display: inline-block;
+}
+
+.logout {
+      display: inline-block;
+
 }
 
 .fontcolor {
@@ -110,6 +120,7 @@ body {
 
 /* 레스토랑 카드 */
 .card img {
+    height: 200px;
     height: 300px;
     object-fit: cover;
 }
