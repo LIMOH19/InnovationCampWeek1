@@ -138,6 +138,11 @@
 
         function filter() {
 
+            //엔터키 눌렀을때 검색
+            if (window.event.keyCode == 13 ) {
+                find_store()
+            }
+
             let search = document.getElementById("input-store").value.toLowerCase();
             let listInner = document.getElementsByClassName("card");
 
@@ -204,7 +209,7 @@
     </button>
 
     <div class="search-box d-flex justify-content-center">
-        <input id="input-store" class="form-control" style="margin-right: 0.5rem; width: 10rem" onkeyup="filter()">
+        <input id="input-store" class="form-control"  style="margin-right: 0.5rem; width: 10rem" onkeyup="filter()">
         <button class="button is-primary is-buton" onclick="find_store()">검색<i class="fa fa-search"></i>
         </button>
     </div>
