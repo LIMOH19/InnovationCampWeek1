@@ -90,27 +90,13 @@ World on Plate에서 대륙별 레스토랑을 추천 받고 나만의 맛집도
 **Issue5. 검색 필터링 기능에서 card 정렬 문제**
 *문제*: 검색 필터링 할 때 input으로 들어온 값과 대조해서 card-title에 해당하는 값이 없으면 안 보이게 설정했는데 card들이 정렬되지 않고 필터링된 부분만 안 보이게 됨
 *해결*: 필터링할 때 필터링된 부분을 style.display = 'none' 이라고 설정했는데 필터링된 부분의 상위 div 태그 (카드들을 감싸고 있는 div 태그)가 남아있어서 문제가 생겼음. 필터링할 부분의 class name을 card가 아닌 상위 태그의 col 형태로 바꿔줌
->let temp_html = `<div class="card">
-                                             <img src="../static/${file}" class="card-img-top" alt="${name}">
-                                             <div class="card-body">
-                                                 <h5 class="card-title">${name}</h5>
-                                                 <h6 class="card-star">${star_image}</h6>
-                                                 <p class="card-text">${review}</p>
-                                             </div>
-                                         </div>`
 
-에서 상위 태그 div class="col" 추가
 
->let temp_html = `<div class="col">
-                                         <div class="card">
-                                             <img src="../static/${file}" class="card-img-top" alt="${name}">
-                                             <div class="card-body">
-                                                 <h5 class="card-title">${name}</h5>
-                                                 <h6 class="card-star">${star_image}</h6>
-                                                 <p class="card-text">${review}</p>
-                                             </div>
-                                         </div>
-                                     </div>`
+> 필터링 할 let temp_html = `document.getElementsByClassName("card")`
+
+에서 'card' 를 'col' 로 변경
+
+>let temp_html = `document.getElementsByClassName("col")`
 
 
 
