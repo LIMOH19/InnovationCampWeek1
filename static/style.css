@@ -18,7 +18,7 @@ body {
 }
 
 .head-img {
-    width:100%;
+    width: 100%;
     height: 100px;
     background-image: url("../static/generatedtext.png");
     background-position: center;
@@ -38,7 +38,7 @@ body {
 }
 
 .h1 {
-      display: inline-block;
+    display: inline-block;
 }
 
 .fontcolor {
@@ -48,8 +48,8 @@ body {
 .continent-btn {
     border-radius: 5px;
     font-weight: bold;
-    color:white;
-    background-color:#FFBB11;
+    color: white;
+    background-color: #FFBB11;
 }
 
 .continent-btn:hover {
@@ -61,7 +61,7 @@ body {
 
 .ALL {
     position: relative;
-    top : 150px;
+    top: 150px;
     left: 300px;
     padding: 30px;
     border-radius: 50%;
@@ -69,8 +69,8 @@ body {
 
 .AF {
     position: relative;
-    top : 150px;
-    right : 400px;
+    top: 150px;
+    right: 400px;
 }
 
 .NA {
@@ -134,7 +134,7 @@ body {
     margin-bottom: 5px;
 }
 
-span{
+span {
     font-weight: bold;
 }
 
