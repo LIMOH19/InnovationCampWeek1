@@ -35,6 +35,7 @@
             bsCustomFileInput.init()
         });
 
+        // 검색 기능
         function find_store() {
 
             $('#place-lists').empty()
@@ -140,6 +141,7 @@
             });
         }
                 */
+
         // function search_place() {
         //     let word = $('#search').val();
         //     // alert(word);
@@ -176,12 +178,13 @@
             }
 
             let search = document.getElementById("input-store").value.toLowerCase();
-            let listInner = document.getElementsByClassName("card");
+            let listInner = document.getElementsByClassName("col");
+
 
             for (let i = 0; i < listInner.length; i++) {
                 store = listInner[i].getElementsByClassName("card-title");
                 if (store[0].innerHTML.toLowerCase().indexOf(search) != -1) {
-                    listInner[i].style.display = "flex"
+                    listInner[i].style.display = "grid"
                 } else {
                     listInner[i].style.display = "none"
                 }
