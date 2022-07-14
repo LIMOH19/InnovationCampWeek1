@@ -34,16 +34,6 @@ def login():
     msg = request.args.get("msg")
     return render_template('login.html', msg=msg)
 
-
-@app.route('/logout', methods=['POST'])
-def logout():
-    # 쿠키에서 token 삭제
-    response = make_response()
-    response.delete_cookie('mytoken')
-    # print(response)
-    return response
-
-
 @app.route('/sign_in', methods=['POST'])
 def sign_in():
     # 로그인
@@ -103,20 +93,30 @@ def check_dup():
 # 등록하기(POST) API
 @app.route('/post', methods=['POST'])
 def post_place():
+    #img_url_receive = request.form['img_url_give']
     name_receive = request.form['name_give']
     type_receive = request.form['type_give']
     continent_receive = request.form['continent_give']
     star_receive = request.form['star_give']
     review_receive = request.form['review_give']
-    img_url_receive = request.form['img_url_give']
+    file = request.files["file_give"]
+
+    extension = file.filename.split('.')[-1]
+    today = datetime.now()
+    mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+
+    filename = f'file-{mytime}'
+    save_to = f'static/{filename}.{extension}'
+    file.save(save_to)
 
     doc = {
         'name': name_receive,
         'type': type_receive,
         'continent': continent_receive,
-        'star': int(star_receive),
+        'star': star_receive,
         'review': review_receive,
-        'img-url': img_url_receive,
+        'file': f'{filename}.{extension}'
+        #'img-url': img_url_receive,
     }
 
     db.restaurants.insert_one(doc)
